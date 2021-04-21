@@ -10,8 +10,8 @@ mongoose.connect(process.env.MONGO_DB,{ useNewUrlParser: true , useUnifiedTopolo
     .catch(err => console.error('Could not connect to MongoDB...'));
 
 app.use(express.json());
-app.use('api/users', users);
-app.use('api/auth', auth);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
     
 const port = process.env.PORT || 8080;
 app.listen(port,()=> console.log(`Listening on port ${port}...`));    
