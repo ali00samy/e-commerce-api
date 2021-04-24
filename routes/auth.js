@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const bcryptjs = require('bcryptjs');
 const _ = require('lodash');
-const {User} = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
 const {User, validate} = require('../models/user');
