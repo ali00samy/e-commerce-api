@@ -4,12 +4,9 @@ const _ = require('lodash');
 const {User} = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
+const {User, validate} = require('../models/user');
 const router = express.Router();
 
-router.get('/', async (req, res)=> {
-  const user = await User.find().select({name: 1, email :1});
-  res.send(user);
-})
 
 router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
