@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs');
 const _ = require('lodash');
 const mongoose = require('mongoose');
 const express = require('express');
-const {User, validate} = require('../models/user');
+const {User} = require('../models/user');
 const router = express.Router();
 
 
