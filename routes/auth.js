@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const auth = require('../middleware/auth');
 const bcryptjs = require('bcryptjs');
 const _ = require('lodash');
 const mongoose = require('mongoose');
