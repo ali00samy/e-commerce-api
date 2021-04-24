@@ -14,6 +14,7 @@ router.get('/me', auth, async (req, res) => {
 
 router.get('/', async (req, res)=> {
   const user = await User.find().select({name: 1, email :1});
+  res.send(user);
 })
 
 router.post('/', async (req, res) => {
