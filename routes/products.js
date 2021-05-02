@@ -31,3 +31,5 @@ router.post('/', async (req,res) =>{
 
     res.send(product);
 });
+
+module.exports = router;
