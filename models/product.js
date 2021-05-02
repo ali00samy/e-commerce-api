@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {categorySchema} = require('./category');
 
 const productSchema = mongoose.Schema({
     name: {
@@ -30,8 +29,9 @@ const productSchema = mongoose.Schema({
         default:0
     },
     category: {
-        type: categorySchema,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required:true
     },
     countInStock: {
         type: Number,

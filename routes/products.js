@@ -9,8 +9,8 @@ router.get('/', async (req,res) =>{
 });
 
 router.post('/', async (req,res) =>{
-    const category = await Category.findById(req.body.categoryId);
-    if (!category) return res.status(400).send('invalid category');
+    const category = await Category.findById(req.body.category);
+    if(!category) return res.status(400).send('Invalid Category')
 
     const product = new Product({
         name: req.body.name,
@@ -19,9 +19,7 @@ router.post('/', async (req,res) =>{
         image: req.body.image,
         brand: req.body.brand,
         price: req.body.price,
-        category: {
-            _id: category._id,
-        },
+        category: req.body.category,
         countInStock: req.body.countInStock,
         rating: req.body.rating,
         numReviews: req.body.numReviews,
@@ -32,4 +30,3 @@ router.post('/', async (req,res) =>{
     res.send(product);
 });
 
-module.exports = router;
