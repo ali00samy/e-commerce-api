@@ -22,6 +22,14 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
+  phone: {
+    type: String,
+    required: true,
+  },
+  gendre : {
+    type: String,
+    require: true
+  },
   isAdmin: Boolean
 });
 
