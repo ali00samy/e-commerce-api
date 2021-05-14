@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express();
 const {Category} = require('../models/category');
-const {Product} = require('../models/product')
+const {Product} = require('../models/product');
+const {Brand} = require('../models/brand');
 
 router.get(`/`, async (req, res) =>{
     // localhost:3000/api/v1/products?categories=2342342,234234
@@ -30,7 +31,10 @@ router.get(`/:id`, async (req, res) =>{
 
 router.post('/', async (req,res) =>{
     const category = await Category.findById(req.body.category);
-    if(!category) return res.status(400).send('Invalid Category')
+    if(!category) return res.status(400).send('Invalid Category');
+
+    const brand = await Brand.findById(req.body.brand);
+    if(!brand) return res.status(400).send('Invalid brand');
 
     const product = new Product({
         name: req.body.name,

@@ -21,8 +21,9 @@ const productSchema = mongoose.Schema({
         type: String
     }],
     brand: {
-        type: String,
-        default: ''
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Brand',
+        required:true
     },
     price : {
         type: Number,

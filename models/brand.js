@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const categorySchema = mongoose.Schema({
+const brandSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -12,7 +12,7 @@ const categorySchema = mongoose.Schema({
     }
 });
 
-const Category = mongoose.model('Category', categorySchema);
+const Brand = mongoose.model('Brand', brandSchema);
 
-exports.Category = Category;
-exports.categorySchema = categorySchema;
+exports.Brand = Brand;
+exports.brandSchema = brandSchema;
