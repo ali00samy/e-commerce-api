@@ -21,12 +21,12 @@ router.get(`/`, async (req, res) =>{
 
 router.get(`/brands`, async (req, res) =>{
     // localhost:3000/api/v1/products?categories=2342342,234234
-    const productList = await Product.find({brands: req.query.brands.split(',')}).populate('category').populate('brand')
+    const List = await Product.find({brands: req.query.brands.split(',')}).populate('category').populate('brand')
 
-    if(!productList) {
+    if(!tList) {
         res.status(500).json({success: false})
     } 
-    res.send(productList);
+    res.send(List);
 });
 
 router.get(`/:id`, async (req, res) =>{
