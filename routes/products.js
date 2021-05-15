@@ -12,7 +12,7 @@ router.get(`/`, async (req, res) =>{
          filter = {category: req.query.categories.split(','),brand: req.query.brands.split(',')};
     }
 
-    const productList = await Product.find(filter).populate('category','brand');
+    const productList = await Product.find(filter).populate('category').populate('brand');
 
     if(!productList) {
         res.status(500).json({success: false})
