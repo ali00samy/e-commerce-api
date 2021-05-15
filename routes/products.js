@@ -9,7 +9,7 @@ router.get(`/`, async (req, res) =>{
     let filter = {};
     if(req.query.categories || req.query.brands)
     {
-         filter = {category: req.query.categories.split(','), brand: req.query.brands.split(',')};
+         filter = {category: req.query.categories.split(','), brand: req.query.brands};
     }
     const productList = await Product.find(filter).populate('category').populate('brand');
 
