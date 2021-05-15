@@ -7,12 +7,12 @@ const {Brand} = require('../models/brand');
 router.get(`/`, async (req, res) =>{
     // localhost:3000/api/v1/products?categories=2342342,234234
     let filter = {};
-    if(req.query.categories)
+    if(req.query.categories||req.query.brand)
     {
-         filter = {category: req.query.categories.split(',')}
+         filter = {category: req.query.categories.split(','),brand: req.query.brand.split(',')};
     }
 
-    const productList = await Product.find(filter).populate('category');
+    const productList = await Product.find(filter).populate('category','brand');
 
     if(!productList) {
         res.status(500).json({success: false})
