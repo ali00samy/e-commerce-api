@@ -21,9 +21,9 @@ router.get(`/`, async (req, res) =>{
 
 router.get('/brands', async (req, res) =>{
     let filter2 = {};
-    if(req.query.categories)
+    if(req.query.brands)
     {
-         filter2 = {category: req.query.categories.split(',')};
+         filter2 = {brand: req.query.brands};
     }
 
     const List = await Product.find(filter2).populate('category').populate('brand')
