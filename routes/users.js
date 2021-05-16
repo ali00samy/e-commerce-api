@@ -69,6 +69,7 @@ router.put('/:id', async (req, res) => {
       req.params.id,
       {
         name: req.body.name,
+        email:req.body.email,
         password: newPassword,
         phone: req.body.phone,
         gendre: req.body.gendre
