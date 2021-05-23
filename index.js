@@ -5,6 +5,7 @@ const users = require('./routes/users');
 const products = require('./routes/products');
 const categories = require('./routes/categories');
 const brands = require('./routes/brands');
+const orders = require('./routes/orders');
 const app = express();
 
 app.use(cors());
@@ -18,6 +19,7 @@ app.use('/api/users', users);
 app.use('/api/products', products);
 app.use('/api/categories', categories);
 app.use('/api/brands', brands);
+app.use('/api/orders', orders);
     
 const port = process.env.PORT || 8080;
 app.listen(port,()=> console.log(`Listening on port ${port}...`));    
