@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     res.send(orders);
   });
 
-router.get("/mine", async (req, res) => {
+router.get("/mine", auth ,async (req, res) => {
     const orders = await Order.find({ user: req.user._id });
     res.send(orders);
 });
