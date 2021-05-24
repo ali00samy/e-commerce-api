@@ -28,7 +28,8 @@ router.post('/',async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         
         let newOrderItem = new OrderItem({
-            
+            quantity: orderItem.quantity,
+            product: orderItem.product
         })
 
         newOrderItem = await newOrderItem.save();
