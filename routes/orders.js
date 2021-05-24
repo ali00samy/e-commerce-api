@@ -4,7 +4,6 @@ const { OrderItem } = require('../models/order-item');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
-router.use(cors());
 
 router.get("/", async (req, res) => {
     const orders = await Order.find({}).populate('user');

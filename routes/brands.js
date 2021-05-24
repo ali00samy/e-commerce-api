@@ -2,8 +2,6 @@ const express = require('express');
 const {Brand} = require('../models/brand')
 const router = express();
 
-router.use(cors());
-
 router.get('/', async (req, res) =>{
     const brand = await Brand.find();
     res.send(brand);

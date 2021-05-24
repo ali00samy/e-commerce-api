@@ -2,7 +2,6 @@ const express = require('express');
 const { Category, validate} = require('../models/category');
 const router = express();
 
-router.use(cors());
 
 router.get('/', async (req, res) =>{
     const categories = await Category.find();
