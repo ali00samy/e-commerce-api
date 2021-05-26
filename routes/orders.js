@@ -8,7 +8,7 @@ const router = express.Router();
 router.use(cors());
 
 router.get("/", async (req, res) => {
-    const orders = await Order.find({}).populate('user').sort({status:'pendding'});
+    const orders = await Order.find({}).populate('user');
     res.send(orders);
   });
 
