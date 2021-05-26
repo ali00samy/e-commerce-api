@@ -8,19 +8,23 @@ const router = express.Router();
 router.use(cors());
 
 router.get("/", async (req, res) => {
-    const orders = await Order.find({}).populate('user');
+    const orders = await Order.find({}).populate('user').sort({status:'pendding'});
     res.send(orders);
   });
 
 router.get("/mine", auth ,async (req, res) => {
-    const orders = await Order.find({ user: req.user._id }).populate({path:'orderItems',populate:{
-        path: 'product',populate:'category'
+    const orders = await Order.find({ user: req.user._id }).populate('user').populate({path:'orderItems',populate:{
+        path: 'product',populate:'category',populate:'brand'
     }});
     res.send(orders);
 });
 
 router.get("/:id", async (req, res) => {
-    const order = await Order.findOne({ _id: req.params.id });
+    const order = await Order.findOne({ _id: req.params.id })
+    .populate('user')
+    .populate({path:'orderItems',populate:{
+        path: 'product',populate:'category',populate:'brand'
+    }});
     if (order) {
       res.send(order);
     } else {
