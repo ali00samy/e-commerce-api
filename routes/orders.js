@@ -13,7 +13,9 @@ router.get("/", async (req, res) => {
   });
 
 router.get("/mine", auth ,async (req, res) => {
-    const orders = await Order.find({ user: req.user._id });
+    const orders = await Order.find({ user: req.user._id }).populate({path:'orderItems',populate:{
+        path: 'product',populate:'category'
+    }});
     res.send(orders);
 });
 
