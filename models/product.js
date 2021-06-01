@@ -9,7 +9,7 @@ const reviewSchema = new mongoose.Schema(
     {
       timestamps: true,
     }
-);
+  );
 
 const productSchema = mongoose.Schema({
     name: {
