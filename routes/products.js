@@ -112,11 +112,10 @@ router.delete('/:id', (req, res)=>{
 });
 
 router.post('/:id/reviews', auth ,async (req, res) => {
-    const productId = req.params.id;
-    const product = await Product.findById(productId);
+    const product = await Product.findById(req.params.id);
     if (product) {
       const review = {
-        name: req.user.name,
+        name: req.body.name,
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
@@ -127,13 +126,13 @@ router.post('/:id/reviews', auth ,async (req, res) => {
         product.reviews.length;
       const updatedProduct = await product.save();
       res.status(201).send({
-        message: 'Review Created',
-        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+        data: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+        message: 'Review saved successfully.',
       });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
     }
-});
+  });
 
 router.get(`/get/count`, async (req, res) =>{
     const productCount = await Product.countDocuments((count) => count)
