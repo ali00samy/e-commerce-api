@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const reviewSchema = new mongoose.Schema(
+    {
+      name: { type: String, required: true },
+      comment: { type: String, required: true },
+      rating: { type: Number, required: true },
+    },
+    {
+      timestamps: true,
+    }
+);
+
 const productSchema = mongoose.Schema({
     name: {
         type: String,
@@ -56,6 +67,7 @@ const productSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    reviews: [reviewSchema]
 })
 
 const Product = mongoose.model('Product', productSchema);

@@ -108,7 +108,36 @@ router.delete('/:id', (req, res)=>{
     }).catch(err=>{
        return res.status(500).json({success: false, error: err}) 
     })
-})
+});
+
+router.post('/:id/reviews', auth ,async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+      if (product.reviews.find((x) => x.name === req.user.name)) {
+        return res
+          .status(400)
+          .send({ message: 'You already submitted a review' });
+      }
+      const review = {
+        name: req.user.name,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
+      };
+      product.reviews.push(review);
+      product.numReviews = product.reviews.length;
+      product.rating =
+        product.reviews.reduce((a, c) => c.rating + a, 0) /
+        product.reviews.length;
+      const updatedProduct = await product.save();
+      res.status(201).send({
+        message: 'Review Created',
+        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+      });
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+});
 
 router.get(`/get/count`, async (req, res) =>{
     const productCount = await Product.countDocuments((count) => count)
@@ -119,7 +148,7 @@ router.get(`/get/count`, async (req, res) =>{
     res.send({
         productCount: productCount
     });
-})
+});
 
 router.get(`/get/featured/:count`, async (req, res) =>{
     const count = req.params.count ? req.params.count : 0
