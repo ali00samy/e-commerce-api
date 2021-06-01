@@ -4,6 +4,7 @@ var cors = require('cors');
 const {Category} = require('../models/category');
 const {Product} = require('../models/product');
 const {Brand} = require('../models/brand');
+const auth = require('../middleware/auth');
 
 router.use(cors());
 
