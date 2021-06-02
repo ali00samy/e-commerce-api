@@ -49,14 +49,11 @@ router.post('/',async (req,res)=>{
     const { error } = validateOrder(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
 
-    const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
-        const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
-        const totalPrice = orderItem.product.price * orderItem.quantity;
-        return totalPrice
+    const productCount = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
+        const orderItem = await OrderItem.findById(orderItemId).populate('product');
+        const count = orderItem.product;
+        if(count.countInStock===0) return res.status(400).send('product is not in stock');
     }))
-
-    const totalPrice = totalPrices.reduce((a,b) => a +b , 0);
-
 
     let order = new Order({
         orderItems: orderItemsIdsResolved,
