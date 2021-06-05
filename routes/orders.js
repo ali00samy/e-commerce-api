@@ -1,6 +1,7 @@
 const {Order,validateOrder} = require('../models/order');
 const express = require('express');
 const { OrderItem } = require('../models/order-item');
+const {Product} = require('../models/product');
 const auth = require('../middleware/auth');
 var cors = require('cors');
 const router = express.Router();
