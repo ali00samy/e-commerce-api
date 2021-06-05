@@ -116,7 +116,7 @@ router.post('/:id/reviews', auth ,async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       const review = {
-        name: req.user.name,
+        name: req.body.name,
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
