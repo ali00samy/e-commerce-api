@@ -71,6 +71,7 @@ router.post('/',async (req,res)=>{
         country: req.body.country,
         phone: req.body.phone,
         status: req.body.status,
+        totalPrice: totalPrice,
         user: req.body.user,
     })
 
