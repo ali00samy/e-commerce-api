@@ -9,6 +9,7 @@ const orders = require('./routes/orders');
 const app = express();
 
 app.use(cors());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 
 mongoose.connect(process.env.MONGO_DB,{ useNewUrlParser: true , useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB...'))

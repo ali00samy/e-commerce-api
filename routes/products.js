@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express();
+const multerConfig = require('../multer');
+const cloud = require('../cloudinaryconifg');
 var cors = require('cors');
 const {Category} = require('../models/category');
 const {Product} = require('../models/product');
@@ -48,18 +50,20 @@ router.get(`/:id`, async (req, res) =>{
     res.send(product);
 });
 
-router.post('/', async (req,res) =>{
+router.post('/', multerConfig.any('image') ,async (req,res) =>{
     const category = await Category.findById(req.body.category);
     if(!category) return res.status(400).send('Invalid Category');
 
     const brand = await Brand.findById(req.body.brand);
     if(!brand) return res.status(400).send('Invalid brand');
 
+    const result = await cloud.uploads(req.files[0].path)
+
     const product = new Product({
         name: req.body.name,
         description: req.body.description,
         richDescription: req.body.richDescription,
-        image: req.body.image,
+        image: result.url,
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
